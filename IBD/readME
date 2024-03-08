@@ -1,0 +1,3 @@
+This folder contains all code related to Identity-by-descent (IBD) analysis using RefinedIBD (Browning & Browning 2013) and mergeIBD to remove gaps/genotype errors.
+Executed IBD analysis in command line & analyzed using R.
+email rke27@cornell.edu or ruthkepstein@gmail.com with questions.
