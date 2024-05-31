@@ -1,0 +1,16 @@
+###chr1
+k=1000000
+parallel --jobs 100 < chr1_argweaver_teosintes.txt
+for i in {1..306500000..1000000};
+do
+	echo "arg-sample \
+	--vcf /home2/rke27/GWAS/teosintes_5pops_filtered_phased.hmp3filtered.rmdup.vcf.gz \
+	--phased-vcf \
+	--overwrite \
+	--maskmap chr1_v4_nongenicregions_5kb.bed \
+	--recombmap Chr1_final_nozeros_v4_teosinte_normalizedrecombrates.bed \
+	--mutrate 1.7e-09 \
+	--popsize-file /home2/rke27/maize_genome_files/teosinte_pop_sizes.bed \
+	--region 1:$i-$(($i+$k)) \
+	-o teosintes_v4_chr1_$i_$(($i+$k))_ARGweaver_output";
+done > chr1_argweaver_teosintes.txt
