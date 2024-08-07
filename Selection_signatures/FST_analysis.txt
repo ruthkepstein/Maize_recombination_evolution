@@ -1,0 +1,29 @@
+##########################################Fst on maize & teosinte & landrace
+#merge all of maize together
+bcftools concat -o hmp321_agvp4_chrscombined_filteredsnpsLLDNI5_60lines.vcf -Oz hmp321_agvp4_chr1_filteredsnpsLLDNI5_60lines.vcf.gz hmp321_agvp4_chr2_filteredsnpsLLDNI5_60lines.vcf.gz hmp321_agvp4_chr3_filteredsnpsLLDNI5_60lines.vcf.gz hmp321_agvp4_chr4_filteredsnpsLLDNI5_60lines.vcf.gz hmp321_agvp4_chr5_filteredsnpsLLDNI5_60lines.vcf.gz hmp321_agvp4_chr6_filteredsnpsLLDNI5_60lines.vcf.gz hmp321_agvp4_chr7_filteredsnpsLLDNI5_60lines.vcf.gz hmp321_agvp4_chr8_filteredsnpsLLDNI5_60lines.vcf.gz hmp321_agvp4_chr9_filteredsnpsLLDNI5_60lines.vcf.gz hmp321_agvp4_chr10_filteredsnpsLLDNI5_60lines.vcf.gz
+
+#merging maize & teosinte together
+bcftools merge -m snp /home2/rke27/uplifted_APGv4/hmp321_agvp4_chrscombined_filteredsnpsLLDNI5_60lines.vcf.gz /home2/rke27/GWAS/teosintes_5pops_filtered_phased.hmp3filtered.rmdup.vcf.gz -Oz -o maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.vcf
+
+#LD prune first
+for i in {1..10}; do echo "bcftools +prune -r ${i} -m 0.3 -w 10000 maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.vcf.gz -Oz -o maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chr${i}.LDpruned03.vcf.gz"; done > LDpruning_parallel.txt
+parallel --jobs 10 < LDpruning_parallel.txt
+
+#concat all chromosomes together
+bcftools concat -Oz -o maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chrscombined.LDpruned.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chr1.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chr2.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chr3.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chr4.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chr5.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chr6.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chr7.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chr8.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chr9.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chr10.LDpruned03.vcf.gz
+
+#running Fst
+vcftools --gzvcf maize_teosinte_combined_filteredsnpsLLDN15_60maize_50teosinte.chrscombined.LDpruned.vcf.gz --weir-fst-pop /home2/rke27/uplifted_APGv4/samples.txt --weir-fst-pop /home2/rke27/GWAS/teosinte_5pops.csv --out maize_60lines_teosinte_50lines_Fst_LDpruned03.txt
+
+#looking at Fst in known domestication sweeps
+bedmap --echo --mean --delim '\t' /home2/rke27/domestication_improvement_loci/domesticated_loci_v4_uniq_sorted.bed maize_60lines_teosinte_50lines_Fst_LDpruned03.5cols_noNA.weir.fst | less -S 
+
+#redoing with 100 maize lines and 100 teosinte lines
+bcftools merge -m snp /home2/rke27/uplifted_APGv4/hmp321_agvp4_chrcombined_filteredsnpsLLDNI5_100lines.vcf.gz /home2/rke27/GWAS/all_teosintes_JRIAL2_8_10_palmarchico.100lines.hmp3.filter.rmdup.vcf.gz -Oz -o maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.vcf
+
+for i in {1..10}; do echo "bcftools +prune -r ${i} -m 0.3 -w 10000 maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.vcf.gz -Oz -o maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chr${i}.LDpruned03.vcf.gz"; done > LDpruning_parallel.txt
+parallel --jobs 10 < LDpruning_parallel.txt
+
+bcftools concat -Oz -o maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chrscombined.LDpruned.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chr1.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chr2.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chr3.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chr4.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chr5.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chr6.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chr7.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chr8.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chr9.LDpruned03.vcf.gz maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chr10.LDpruned03.vcf.gz
+
+vcftools --gzvcf maize_teosinte_combined_filteredsnpsLLDN15_100maize_100teosinte.chrscombined.LDpruned.vcf.gz --weir-fst-pop /home2/rke27/uplifted_APGv4/samples_100.txt --weir-fst-pop /home2/rke27/GWAS/allteosintes_100.txt --out maize_100lines_teosinte_100lines_Fst_LDpruned.txt
