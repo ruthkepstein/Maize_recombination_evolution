@@ -1,0 +1,19 @@
+##looking at if DMRs correlate with differential hotspots between maize & teosinte
+
+bedtools intersect -a DMRs_lower_in_maize_CG_proper.bed -b /home2/rke27/crossover_datasets/Maize_DRRs_chrcombined_100kb_2sd.bed -f 1 | wc -l
+bedtools intersect -a DMRs_lower_in_maize_CHG_proper.bed -b /home2/rke27/crossover_datasets/Maize_DRRs_chrcombined_100kb_2sd.bed -f 1 | wc -l
+
+bedtools intersect -a DMRs_higher_in_maize_CG_proper.bed -b /home2/rke27/crossover_datasets/Teo_DRRs_chrcombined_100kb_2sd.bed -f 1 | wc -l
+bedtools intersect -a DMRs_higher_in_maize_CHG_proper.bed -b /home2/rke27/crossover_datasets/Teo_DRRs_chrcombined_100kb_2sd.bed -f 1 | wc -l
+
+####redoing methylation DMRs but with 60% diff
+#there are more maize hypo-methylated regions than hyper-methylated regions 
+
+/home2/rke27/metilene_v0.2-8/metilene -a Maize -b Teo --minMethDiff 0.6 --threads 45 --mincpgs 8 --maxdist 300 CG_metilene_Teo_Maize_input.txt | sort -V -k1,1 -k2,2n > CG_teo_maize_output_sorted_60.txt
+/home2/rke27/metilene_v0.2-8/metilene -a Maize -b Teo --minMethDiff 0.6 --threads 45 --mincpgs 8 --maxdist 300 CHG_metilene_Teo_Maize_input.txt | sort -V -k1,1 -k2,2n > CHG_teo_maize_output_sorted_60.txt
+
+bedtools intersect -a /home2/rke27/crossover_datasets/Maize_DRRs_chrcombined_1Mb_2sd.bed -b CG_DMR_lower_maize_60.txt -F 1 | wc -l 
+bedtools intersect -a /home2/rke27/crossover_datasets/Maize_DRRs_chrcombined_1Mb_2sd.bed -b CHG_DMR_lower_maize_60.txt -F 1 | wc -l
+
+bedtools intersect -a /home2/rke27/crossover_datasets/Teo_DRRs_chrcombined_1Mb_2sd.bed -b CG_DMR_higher_maize_60.txt -F 1 | wc -l
+bedtools intersect -a /home2/rke27/crossover_datasets/Teo_DRRs_chrcombined_1Mb_2sd.bed -b CHG_DMR_higher_maize_60.txt -F 1 | wc -l
