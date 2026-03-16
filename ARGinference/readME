@@ -2,6 +2,9 @@ This folder contains all code related to ARG-inference & post-processing of 60 i
 
 ARG_recombinationrate_analysis_plots.R details how to process recombination breakpoints and branch lengths over MCMC iterations to find average recombination rates per specified bin size. Also includes plotting functions to plot ARG-inferred recombination rates across chromosomes.
 ARGweaver_script.txt is an example of parallelization of ARGweaver in 1Mb chunks on teosinte chromosome 1.
+
 RTH_extract.sh is a bash script to extract RTH values-- used to detect partial selecive sweeps throughout the ARG-- per chromosome.
+
 extracting_recombrate_ARGs.sh is a bash script to extract recombination breakpoints & branch lengths per a specified time in the ARG.
+
 zero_shot_score.R details how to process zero-shot score dataset. Output from ARG_recombinationrate_analysis_plots.R is needed to calculate zero-shot score per specified bin size.
