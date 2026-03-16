@@ -2,6 +2,6 @@ This folder contains bash scripts and python code focused on understanding the r
 
 DMR_DRR_overlap_analysis.txt is a bash script overlapping differentially methylated regions with differentially recombining regions. DRRs created from output in ARG-inference folder. DMRs taken from https://doi.org/10.1038/s41467-020-19333-4.
 
-Recombination_rate_prediction.ipynb is python scripts that creates a linear model to assess various epigenetic and genomic content effects on recombination rates.
+Recombination_rate_prediction.ipynb is python scripts that creates a linear model to predict recombination rates form cytosine methylation. Input into this Jupyter notebook contains a file with more epigenetic features and genomic content annotated for each bin, which can be provided on request.
 
 Selectivesweeps_meioticgenes_overlap_plot.R is R code plotting the location of various meiotic genes with respect to previously identified selective sweps from https://doi.org/10.1186/s12870-022-03427-w.
