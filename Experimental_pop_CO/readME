@@ -2,5 +2,5 @@ Maize COs taken from: 10.1073/pnas.1413864112.
 Teosinte COs taken from: https://doi.org/10.1073/pnas.2112970118
 
 This .R code details how to read in maize & teosinte crossover events, filter based on resolution, number of COs per individual, and normalize by population size. 
-.R also has code related to finding the distances of COs to the nearest telomere (based on B73 v4) and is able to calculate a genetic map based on COs.
-At the end, there is ggplot code to plot CO event/ rates across the 10 chromosomes of maize & teosinte.
+.R also has code related to finding the distances of COs to the nearest telomere (based on B73 v4 coordinates) and is able to calculate a genetic map based on COs between SNPs, with a physical map provided.
+At the end, there is ggplot code to plot CO events and recombination rates across the 10 chromosomes of maize & teosinte.
