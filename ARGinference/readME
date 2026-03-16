@@ -1,5 +1,5 @@
 This folder contains all code related to ARG-inference of 60 maize lines and 51 teosinte lines. Used ARGweaver to extract recombination breakpoints and branch lengths (bash scripts).
-The .R code 
+ARG_recombinationrate_analysis_plots.R details how to process recombination breakpoints and branch lengths over MCMC iterations to find average recombination rates per specified bin length.
 
 ARGweaver_script.txt is an example of parallelization of ARGweaver in 1Mb chunks on maize chromosome 1.
 RTH_extract.sh is a bash script to extract RTH values from ARGs per chromosome.
