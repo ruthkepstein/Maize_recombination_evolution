@@ -1,1 +1,1 @@
-This folder encompasses a larger analysis on selection signatures in recombination/meiosis-related genes.
+This folder contains a bash script related to LD pruning of maize & teosinte merged VCFs with calculations on fixation index (FST) SNP-wise.
