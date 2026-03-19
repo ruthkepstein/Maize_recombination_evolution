@@ -82,6 +82,6 @@ shared_score <- hotspot_score(allchr_shared, top_del, cds_bed)
 all_score <- hotspot_score(all_chr_all, top_del, cds_bed)
 
 #t-test on each comparison
-t.test(maize_score$score_per_codon, teo_score$score_per_codon)
-t.test(shared_score$score_per_codon, teo_score$score_per_codon)
-t.test(shared_score$score_per_codon, maize_score$score_per_codon)
+t.test(maize_score$load_per_codon, teo_score$load_per_codon)
+t.test(shared_score$load_per_codon, teo_score$load_per_codon)
+t.test(shared_score$load_per_codon, maize_score$load_per_codon)
