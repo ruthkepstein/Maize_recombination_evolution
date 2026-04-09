@@ -1,1 +1,5 @@
 This folder contains scripts related to the simulation of the maize demographic history, including the bottleneck and rapid population expansion. All scripts are derived from 10.1073/pnas.2503748122.
+
+msprime_generate_neutral.py generates the initial demographic history of maize with the relevant recombination map + mutation rate.
+slim_maize_chr4_neutral.slim and slim_maize_chr4_selection.slim are to simulate the genetic bottleneck of maize, under neutrality and selection, respectively, with the tree sequence generated from msprime_generate_neutral.py.
+msprime_addmutations.py adds neutral mutations to the resulting tree sequences from SLiM, samples 60 random individuals, and outputs the VCF.
